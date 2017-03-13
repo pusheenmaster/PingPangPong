@@ -7,11 +7,9 @@ public abstract class ObjetMobile extends Objet {
     protected double x;
     /** La position sur y */
     protected double y;
-    /** La vitesse suivant x en pixels/ms */
-    protected double dx;
-    /** La vitesse suivant y en pixels/ms */
-    protected double dy;
-    /** La direction (angle) **/
+    /** La vitesse */
+    protected double vitesse;
+    /** La direction (angle par rapport à l'axe horizontal et le coin haut gauche) **/
     protected double direction;
     
     /** Constructeur */
@@ -20,9 +18,8 @@ public abstract class ObjetMobile extends Objet {
     }
     
     /** Methode pour bouger l'objet. Delta s'exprime en ms **/
-    public void move( long delta) {
-        x += (delta * dx) / 1000;
-        y += (delta * dy) / 1000;
-    }
+    public void bouger() {
+		x=+vitesse*Math.cos(direction);
+		y=+vitesse*Math.sin(direction);
+	}
 }
-
