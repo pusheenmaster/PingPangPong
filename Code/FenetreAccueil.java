@@ -17,6 +17,7 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
     // AFFICHAGE
     private final int LARGEUR = 1000;
     private final int HAUTEUR = 800;
+    private JPanel principal = new JPanel();
     private JButton boutonJouer = new JButton();
     private JButton boutonScores = new JButton();
     private JButton boutonCredits = new JButton();
@@ -30,6 +31,8 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
     // DEROULEMENT DU JEU 
     private int temps;
     private boolean jeuEnCours = false;
+    private boolean credits = false;
+    private boolean scores = false;
     
     /**
      * Constructeur de la classe UneFenetre
@@ -59,7 +62,6 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
 		imageFond = t.getImage("space.png");  
         
         //Création du conteneur principal
-        JPanel principal = new JPanel();
         principal.setBackground(Color.GREEN);
         principal.setLayout(new BorderLayout());
         
@@ -120,14 +122,22 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
             temps += TPS_TIMER_MS;
             setTitle("PANG ! Temps : "+temps/1000+" Vies : "+0);
             jeuEnCours = true;
+            scores = false;
+            credits = false;
         }
         
         if (e.getSource() == boutonScores) {
-            
+            setTitle("PANG ! Tableau des Scores");
+            scores = true;
+            credits = false;
+            jeuEnCours = false;
         }
         
         if (e.getSource() == boutonCredits) {
-    	
+            setTitle("PANG ! Crédits");
+            scores = false;
+            credits = true;
+            jeuEnCours = false;
         }
         repaint();
     }
@@ -161,10 +171,25 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
     
     public void paint(Graphics g) {
         if(credits){
+            JPanel panelCredits = new JPanel();
+            panelCredits.setPreferredSize(new Dimension(LARGEUR,HAUTEUR-100));
+            panelCredits.setBackground(Color.BLACK);
+            principal.add(panelCredits, BorderLayout.CENTER);
+            this.setContentPane(principal);
         }
-        else if(jeu){
+        else if(jeuEnCours){
+            JPanel panelJeu = new JPanel();
+            panelJeu.setPreferredSize(new Dimension(LARGEUR,HAUTEUR-100));
+            panelJeu.setBackground(Color.WHITE);
+            principal.add(panelJeu, BorderLayout.CENTER);
+            this.setContentPane(principal);
         }
         else if(scores){
+            JPanel panelScores = new JPanel();
+            panelScores.setPreferredSize(new Dimension(LARGEUR,HAUTEUR-100));
+            panelScores.setBackground(Color.PINK);
+            principal.add(panelScores, BorderLayout.CENTER);
+            this.setContentPane(principal);
         } 
         else{
             // préparation de l'affichage en dessinant dans le buffer
@@ -180,4 +205,3 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
     }
 
 }
-
