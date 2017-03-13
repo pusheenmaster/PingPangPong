@@ -6,6 +6,7 @@ public class Balle extends ObjetMobile {
     /** La taille des balles */
     private int size;
     private BufferedImage image;
+    private int hauteurMax;
     
     /** Balle qui part de gauche a droite **/
 	public Balle(String file, int x, int y, int size){
@@ -38,8 +39,8 @@ public class Balle extends ObjetMobile {
 			x=p.getWidth()-image.getWidth();
 			this.direction+=Math.PI/2;
 		}
-		if(y + (int)(vitesse*Math.sin(direction))>p.getHeight()-image.getHeight()){
-			y=p.getHeight()-image.getHeight();
+		if(y + (int)(vitesse*Math.sin(direction))>hauteurMax-image.getHeight()){
+			y=hauteurMax-image.getHeight();
 			this.direction+=Math.PI/2;
 		}
 		super.bouger();
