@@ -1,35 +1,37 @@
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+
 public class Missile extends ObjetMobile {
 	
-    private BufferedImage imagePointe
-    //private int x     // x personnage
+    private BufferedImage imagePointe;  
     private int taille;
-    private int largeurFleche;
-    //private int y;
     
-    public Missile() {
-        super();
-	x = perso.get
-	taille = 0;
+    
+    public Missile(int x) {    // x personnage
+        super(x, 0);
+        taille = 0;
+        largeur = 10;
+        hauteur = taille + imagePointe.getHeight();
     }
 	
-	public int getTaille(){
+    public int getTaille(){
 		return taille;
 	}
 	
-public void dessiner(Graphics g, JFrame jf){
-    y = jf.getHeight() - taille - imagePointe.getHeight();
-    g.drawImage(imagePointe, x, y, jf);
-    g.fillRect(x + imagePointe.getWidth()/2 - largeurFleche/2, jf.getHeight() - taille , largeurfleche, taille);
-
-
-
-public boolean bouger(){
-    if(y>0){
-        taille += vitesse;
-        return true;
+    public void dessiner(Graphics g, JFrame jf){
+        y = jf.getHeight() - taille - imagePointe.getHeight();
+        g.drawImage(imagePointe, (int)x, (int)y, jf);
+        g.fillRect((int)(x + imagePointe.getWidth()/2 - largeur/2), jf.getHeight() - taille , largeur, taille);
     }
-    return false;
-}
+
+    public boolean bouger(){
+        if(y>0){
+            taille += vitesse;
+            return true;
+        }
+        return false;
+    }
 	
 }
     
