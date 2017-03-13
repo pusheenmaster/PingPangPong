@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 
 public abstract class ObjetMobile extends Objet {
     
-	/** La position sur x */
+    /** La position sur x */
     protected double x;
     /** La position sur y */
     protected double y;
