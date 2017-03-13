@@ -16,6 +16,10 @@ public abstract class ObjetMobile extends Objet {
     public ObjetMobile(String file, int x, int y) {
         super(file,x,y);
     }
+	
+    public ObjetMobile(int x, int y) {
+        super(x,y);
+    }
     
     /** Methode pour bouger l'objet. Delta s'exprime en ms **/
     public void bouger() {
