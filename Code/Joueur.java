@@ -11,6 +11,11 @@ public class Joueur{
         perso = null;
     }
     
+    public Joueur(String nom, Personnage perso){
+        this.nom = nom;
+        this.perso = perso;
+    }
+    
     public String getNom(){
 		return nom;
 	}
@@ -21,4 +26,5 @@ public class Joueur{
 		
 	
 }
+
 
