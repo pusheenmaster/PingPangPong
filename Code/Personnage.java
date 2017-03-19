@@ -12,15 +12,19 @@ public class Personnage extends Objet{
     
     public Personnage(String nomImage){
         super();
-        try{
-			image = ImageIO.read(new File(nomImage));
-		} catch(Exception e) {
-		}
-        position = new Point(200, image.getHeight());
+		 try {
+             image = ImageIO.read(new File(nomImage));
+        } catch(Exception err) {
+            System.out.println("image" +" introuvable !");            
+            System.exit(0);
+        } 
+		x = 200;
+		y = 0;
         hauteur = image.getHeight();
         largeur = image.getWidth();
         nbVies = 3;
     }
+   
         
     
     public int getNbVies(){
@@ -33,14 +37,17 @@ public class Personnage extends Objet{
     
     public boolean deplacement(boolean gauche){
 		if(gauche){
-			position.setLocation(   // attributs x et y
+			x += 5;
+		}else{
+			x -= 5;
 		}
         return true;
     }
     
     
-    public void dessiner(Graphics g, JFrame jf){
-		g.drawImage(image,(int)position.getX(),(int)position.getY(),jf);
+    public void dessiner(Graphics g, JPanel jp){  // JPanel changements pour test
+		y = jp.getHeight() - image.getHeight();
+		g.drawImage(image,x,y,jp);
     }
 		
 }
