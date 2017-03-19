@@ -4,9 +4,9 @@ import java.awt.Rectangle;
 public abstract class ObjetMobile extends Objet {
     
     /** La position sur x */
-    protected double x;
+    //protected double x;
     /** La position sur y */
-    protected double y;
+    //protected double y;
     /** La vitesse */
     protected double vitesse;
     /** La direction (angle par rapport à l'axe horizontal et le coin haut gauche) **/
@@ -21,9 +21,10 @@ public abstract class ObjetMobile extends Objet {
         super(x,y);
     }
     
+    
     /** Methode pour bouger l'objet. Delta s'exprime en ms **/
     public void bouger() {
-		x=+vitesse*Math.cos(direction);
-		y=+vitesse*Math.sin(direction);
+		x +=(int) vitesse*Math.cos(direction);
+		y +=(int) vitesse*Math.sin(direction);
 	}
 }
