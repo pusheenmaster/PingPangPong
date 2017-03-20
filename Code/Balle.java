@@ -8,61 +8,35 @@ import javax.swing.*;
 import java.lang.Math; 
 import java.lang.Object;
 
-public class Balle extends ObjetMobile {
+public class Balle extends Objet {
 	
-    /** La taille des balles */
-    private int size;
-    private BufferedImage image;
+    private int numero;
     private int hauteurMax;
+    private boolean monte;
     
     /** Balle qui part de gauche a droite **/
-	public Balle(int x, int y, int size){
-        super(("balle_"+size+".png"), x, y);
-        this.size = size;
-        direction = (int)(new java.util.Radom()*2*Math.PI);
-        this.x=x;
-        this.y=y;
-        vitesse=10;
-        try {
-             image= ImageIO.read(new File("balle_"+size+".png"));
-        } catch(Exception err) {
-            System.out.println("fichier introuvable !");            
-            System.exit(0);
-        }
+	public Balle(int numero, JPanel jp){
+        super(200, 0 ,("balle_"+numero+".png"), 2*Math.PI/3, 2 ); // toutes les balles initialisée pareil
+        this.numero = numero;
+        hauteurMax = 4*jp.getHeight()/5; // a changer en fonction numero
+        monte = false;
     }
     
-    /** Si la balle doit aller dans l'autre direction **/
-    public Balle(int x, int y, int size, boolean autreDirection){
-        super(("balle_" + size + ".png"), x, y);
-        this.size = size; 
+    public int getNumero(){
+    	return numero;
     }
     
-    public int getX(){
-    	return (int) x;
-    }
-    public int getY(){
-    	return (int) y;
-    }
-    public int getSize(){
-    	return size;
-    }
-    public void setX(int nX){
-    	x=nX;
-    }
-    public void setY(int nY){
-    	y=nY;
-    }
     
-    public void bouger(JPanel p){
-		while(x + (int)(vitesse*Math.cos(direction))>p.getWidth()-image.getWidth()){
-			x=p.getWidth()-image.getWidth();
+    public void bouger(JPanel jp){
+		while(x + (int)(vitesse*Math.cos(direction))>jp.getWidth()-largeur){
+			x=jp.getWidth()-largeur;
 			this.direction+=Math.PI/2;
 		}
 		while(x + (int)(vitesse*Math.cos(direction))<0){
 			x=0;
 			this.direction+=Math.PI/2;
 		}
-		while(y + (int)(vitesse*Math.sin(direction))>p.getHeight()-hauteurMax-image.getHeight()){
+		while(y + (int)(vitesse*Math.sin(direction))>jp.getHeight()-hauteurMax-hauteur){
 			y=hauteurMax-image.getHeight();
 			this.direction+=Math.PI/2;
 		}
@@ -73,9 +47,6 @@ public class Balle extends ObjetMobile {
 		super.bouger();
 	}
 	
-	public void dessiner(Graphics g, JPanel jp){  // JPanel changements pour test
-		g.drawImage(image,(int)x,(int)y,jp);
-	}
 }
 
 
