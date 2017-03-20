@@ -6,13 +6,10 @@ import java.awt.geom.*;
 import java.awt.image.*;
 import java.util.LinkedList ;
 
-
-
 public class Partie {
     
     // Atributs
     private Image imageFond;
-    private Timer timer;
     
     private Personnage perso;
     private Joueur joueur;
@@ -25,6 +22,9 @@ public class Partie {
     private boolean finPartie;
     
     // Constructeur
+    public Partie(){
+        
+    }
     
     // Accesseurs
     public boolean getGauche(){
