@@ -30,10 +30,10 @@ public class Missile extends ObjetMobile {
 		return taille;
 	}
 	
-    public void dessiner(Graphics g , JFrame jf){
-        y = jf.getHeight() - taille - imagePointe.getHeight();
-        g.drawImage(imagePointe, x, y, jf);
-        g.fillRect((int)(x + imagePointe.getWidth()/2 - largeur/2), jf.getHeight() - taille , largeur, taille);
+    public void dessiner(Graphics g , JPanel jp){
+        y = jp.getHeight() - taille - imagePointe.getHeight();
+        g.drawImage(imagePointe, x, y, jp);
+        g.fillRect((int)(x + imagePointe.getWidth()/2 - largeur/2), jp.getHeight() - taille , largeur, taille);
     }
 
     public void bouger(){
