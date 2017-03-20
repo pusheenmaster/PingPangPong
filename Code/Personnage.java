@@ -7,21 +7,11 @@ import java.io.File;
 
 public class Personnage extends Objet{
 	
-	//private BufferedImage image;
     private int nbVies;
     
-    public Personnage(String nomImage){
-        super();
-		 try {
-             image = ImageIO.read(new File(nomImage));
-        } catch(Exception err) {
-            System.out.println("image" +" introuvable !");            
-            System.exit(0);
-        } 
-		x = 200;
-		y = 0;
-        hauteur = image.getHeight();
-        largeur = image.getWidth();
+    public Personnage(JPanel jp, String nomImage){
+        super(jp.getWidth()/2 , 0, nomImage, 0, 5);
+		y = jp.getHeight() - hauteur;
         nbVies = 3;
     }
    
@@ -35,19 +25,14 @@ public class Personnage extends Objet{
         nbVies = nb;
     }
     
-    public boolean deplacement(boolean gauche){
-		if(gauche){
-			x += 5;
-		}else{
-			x -= 5;
+    public boolean bouger(JPanel jp){  // always returns true
+		super.bouger();
+		if(x > jp.getWidth() - largeur){
+			x = jp.getWidth() - largeur;
+		}else if(x<0){
+			x = 0;
 		}
         return true;
-    }
-    
-    
-    public void dessiner(Graphics g, JPanel jp){  // JPanel changements pour test
-		y = jp.getHeight() - image.getHeight();
-		g.drawImage(image,x,y,jp);
     }
 		
 }
