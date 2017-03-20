@@ -35,11 +35,11 @@ public class Balle extends ObjetMobile {
     }
     
     public void bouger(JPanel p){
-		if(x + (int)(vitesse*Math.cos(direction))>p.getWidth()-image.getWidth()){
+		while(x + (int)(vitesse*Math.cos(direction))>p.getWidth()-image.getWidth()){
 			x=p.getWidth()-image.getWidth();
 			this.direction+=Math.PI/2;
 		}
-		if(y + (int)(vitesse*Math.sin(direction))>hauteurMax-image.getHeight()){
+		while(y + (int)(vitesse*Math.sin(direction))>hauteurMax-image.getHeight()){
 			y=hauteurMax-image.getHeight();
 			this.direction+=Math.PI/2;
 		}
