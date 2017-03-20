@@ -4,6 +4,8 @@ import java.awt.event.*;
 import java.io.*;
 import java.awt.geom.*;
 import java.awt.image.*;
+import java.util.LinkedList ;
+
 
 
 public class Partie {
@@ -11,7 +13,12 @@ public class Partie {
     // Atributs
     private Image imageFond;
     private Timer timer;
+    
+    private Personnage perso;
     private Joueur joueur;
+    private LinkedList<Balle> listeBalles;
+    private LinkedList<Missile> listeMissiles;
+    
     private boolean gauche = false;
     private boolean droite = false;
     private BufferedImage [] boules;
@@ -29,9 +36,18 @@ public class Partie {
     public Image[] getBoules(){
         return boules;
     }
+    public Personnage getPersonnage(){
+        return perso;
+    }
     public Joueur getJoueur(){
         return joueur;
     }
+    public LinkedList<Balle> getListeBalles(){
+		return listeBalles;
+	}
+	public LinkedList<Missile> getListeMissiles(){
+		return listeMissiles;
+	}
     public boolean getFinPartie(){
         return finPartie;
     }
@@ -42,10 +58,10 @@ public class Partie {
     
     // Methodes
     public boolean finPartie(){
-        
+        return true;
     }
 //----------------------------------------------------------------------
     public boolean tirerMissile(){
-        
+        return true;
     }
 }
