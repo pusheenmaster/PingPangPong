@@ -6,21 +6,14 @@ import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
 
-public class Missile extends Objet {
+public class Missile extends Objet { // mettre fenetre jeu taille inchangeable
 	
-    private int taille;
+    private int taille; //taille rectangle fleche
     
-    public Missile(int x) {    // x personnage
-        super(x,0);
-        taille = 200;
-        largeur = 10;
-        try {
-             image= ImageIO.read(new File("pointe1.png"));
-        } catch(Exception err) {
-            System.out.println("pointe.jpg" +" introuvable !");            
-            System.exit(0);
-        } 
-        hauteur = taille + image.getHeight();
+    public Missile(int xPerso, JPanel jp ) {   
+        super(xPerso, 0, "pointe1.png", Math.PI/2, 10);
+        y = jp.getHeight() - hauteur;
+        taille = jp.getHeight() - hauteur - y;
         
     }
     
@@ -30,19 +23,18 @@ public class Missile extends Objet {
 	}
 	
     public void dessiner(Graphics g , JPanel jp){
-        y = jp.getHeight() - taille - image.getHeight();
         super.dessiner(g, jp);
-        //g.drawImage(image, x, y, jp);
-        g.fillRect((int)(x + image.getWidth()/2 - largeur/2), jp.getHeight() - taille , largeur, taille);
+        g.fillRect((int)(x + largeur/4), jp.getHeight() - taille , largeur/2, taille);
     }
 
-    public void bouger(){
-		
-        if(y>0){
+    public boolean bouger(JPanel jp){
+		if(y<=0){
+			return false;
+		}else{
             taille += vitesse;
-            //return true;
+            hauteur = taille + hauteur;
+            return super.bouger();
         }
-        //return false;
     }
 	
 }
