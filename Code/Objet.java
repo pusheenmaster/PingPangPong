@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public class Objet {
 	
@@ -45,7 +46,7 @@ public class Objet {
         return true;
     }
     
-    public void dessiner(Graphics g){
+    public void dessiner(Graphics g, JPanel jp){
     }
 		
 }
