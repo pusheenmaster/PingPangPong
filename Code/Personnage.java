@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Personnage extends Objet{
 	
-	private BufferedImage image;
+	//private BufferedImage image;
     private int nbVies;
     
     public Personnage(String nomImage){
