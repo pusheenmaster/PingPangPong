@@ -39,8 +39,16 @@ public class Balle extends ObjetMobile {
 			x=p.getWidth()-image.getWidth();
 			this.direction+=Math.PI/2;
 		}
-		while(y + (int)(vitesse*Math.sin(direction))>hauteurMax-image.getHeight()){
+		while(x + (int)(vitesse*Math.cos(direction))<0){
+			x=0;
+			this.direction+=Math.PI/2;
+		}
+		while(y + (int)(vitesse*Math.sin(direction))>p.getHeight()-hauteurMax-image.getHeight()){
 			y=hauteurMax-image.getHeight();
+			this.direction+=Math.PI/2;
+		}
+		while(y + (int)(vitesse*Math.sin(direction))<0){
+			y=0;
 			this.direction+=Math.PI/2;
 		}
 		super.bouger();
