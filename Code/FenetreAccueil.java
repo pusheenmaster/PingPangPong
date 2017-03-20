@@ -5,7 +5,7 @@ import java.io.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 
-public class FenetreAccueil extends JFrame implements ActionListener, KeyListener {
+public class FenetreAccueil extends JFrame implements ActionListener{
 
     //Declaration des attributs de la fenêtre
     
@@ -23,18 +23,9 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
     private JButton boutonCredits = new JButton();
     private JButton boutonAccueil = new JButton();
     
-    // * * * TIMER * * *
-        private final int TPS_TIMER_MS = 100;
-    private Timer monTimer;
-    
     // * * * DEROULEMENT DU JEU * * *
-    private int temps;
     private boolean jeuEnCours = false;
-
-    // Touches clavier
-    private boolean toucheGauche;
-    private boolean toucheDroit;
-    private boolean toucheSpace;
+    private boolean debut = true;
     
     /**
      * Constructeur de la classe UneFenetre
@@ -83,86 +74,41 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
         boutonScores.addActionListener(this);
         boutonCredits.addActionListener(this);
         boutonAccueil.addActionListener(this);
- 
-        // TIMER
-        monTimer = new Timer(TPS_TIMER_MS,this);
-        temps = 0;
-        
-        // Evenement clavier
-        toucheGauche = false;
-        toucheDroit = false;
-        toucheSpace = false;
-        addKeyListener(this);
         
         //Mise en place du conteneur principal dans la fenetre
         this.setContentPane(panelPrincipal);
         this.setVisible(true);
-        monTimer.start();
     }
     
     public void actionPerformed(ActionEvent e){
-        if(jeuEnCours){
-            temps += TPS_TIMER_MS;
-            setTitle("PANG ! Temps : "+temps/1000+" Vies : "+0);
-            if (toucheDroit){
-            }
-            if (toucheGauche){
-            }
-            if (toucheSpace) {
-            }
-        }
         if (e.getSource() == boutonJouer) {
-            temps += TPS_TIMER_MS;
-            setTitle("PANG ! Temps : "+temps/1000+" Vies : "+0);
+            Partie nouvellePartie = new Partie();
+            setTitle("PANG ! Temps : "+nouvellePartie.get(temps)/1000+" Vies : "+0);
             jeuEnCours = true;
+            debut = false;
             panelAffichage = new PanScores(LARGEUR,HAUTEUR-50);
         }
         
         if (e.getSource() == boutonScores) {
             setTitle("PANG ! Tableau des Scores");
             jeuEnCours = false;
+            debut = false;
             panelAffichage = new PanScores(LARGEUR,HAUTEUR-50);
         }
         
         if (e.getSource() == boutonCredits) {
             setTitle("PANG ! Crédits");
             jeuEnCours = false;
+            debut = false;
             panelAffichage = new PanCredits(LARGEUR,HAUTEUR-50,"cred.png");
         }  
-        if (e.getSource() == boutonAccueil) {
+        if (e.getSource() == boutonAccueil || debut) {
             setTitle("PANG !");
             jeuEnCours = false;
             panelAffichage = new PanAccueil(LARGEUR,HAUTEUR-50,"space.png");
         }
         repaint();
         }
-    
-    public void keyTyped(KeyEvent e) {}
-
-    public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-        switch (code) {
-            case KeyEvent.VK_ESCAPE : System.exit(0); break;
-            case KeyEvent.VK_ENTER :
-                if (monTimer.isRunning())
-                    monTimer.stop();
-                else
-                    monTimer.start();
-            break;
-            case KeyEvent.VK_SPACE : toucheSpace=true; break;        
-            case KeyEvent.VK_LEFT : toucheGauche=true; break;        
-            case KeyEvent.VK_RIGHT : toucheDroit=true; break;
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-        int code = e.getKeyCode();
-        switch (code) {
-            case KeyEvent.VK_SPACE : toucheSpace=false; break;        
-            case KeyEvent.VK_LEFT : toucheGauche=false; break;        
-            case KeyEvent.VK_RIGHT : toucheDroit=false; break;    
-        }
-    }
     
     public void paint(Graphics g) {
         super.paint(g);
@@ -172,5 +118,4 @@ public class FenetreAccueil extends JFrame implements ActionListener, KeyListene
     public static void main(String[] args){
         FenetreAccueil f = new FenetreAccueil();
     }
-
 }
