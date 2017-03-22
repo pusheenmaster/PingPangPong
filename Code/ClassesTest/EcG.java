@@ -12,7 +12,8 @@ public class EcG implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae) {
-       fen.getPersonnage().deplacement(true);
+       fen.getPersonnage().setDirection(Math.PI);
+       fen.getPersonnage().bouger(fen.getPanDessin());
        fen.getPanDessin().repaint();
     }
 }
