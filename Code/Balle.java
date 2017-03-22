@@ -13,38 +13,97 @@ public class Balle extends Objet {
     private int numero;
     private int hauteurMax;
     private boolean monte;
+    private int sens;
     
     /** Balle qui part de gauche a droite **/
 	public Balle(int numero, JPanel jp){
-        super(200, 0 ,("balle_"+numero+".png"), 2*Math.PI/3, 2 ); // toutes les balles initialisée pareil
+        //super(200, 0 ,("balle_"+numero+".png"), 2*Math.PI/3, 2 ); // toutes les balles initialisée pareil
+        super(600, 200 ,"balle.png", 2*Math.PI/3, 30 );
         this.numero = numero;
-        hauteurMax = 4*jp.getHeight()/5; // a changer en fonction numero
+        hauteurMax = 100; // a changer en fonction numero
         monte = false;
+        sens = 1;
     }
     
     public int getNumero(){
     	return numero;
     }
     
+    public int getHauteurMax(){
+		return hauteurMax;
+	}
+	
+	public double getDirection(){
+		return direction;
+	}
+	
+	public boolean getMonte(){
+		return monte;
+	}
+	
+	public int getSens(){
+		return sens;
+	}
     
-    public void bouger(JPanel jp){
-		while(x + (int)(vitesse*Math.cos(direction))>jp.getWidth()-largeur){
-			x=jp.getWidth()-largeur;
-			this.direction+=Math.PI/2;
+    public void changeDirection(){
+		if(direction == Math.PI/3){
+			direction = 2*direction;
 		}
-		while(x + (int)(vitesse*Math.cos(direction))<0){
-			x=0;
-			this.direction+=Math.PI/2;
+		else{
+			direction = Math.PI/3;
 		}
-		while(y + (int)(vitesse*Math.sin(direction))>jp.getHeight()-hauteurMax-hauteur){
-			y=hauteurMax-image.getHeight();
-			this.direction+=Math.PI/2;
+	}
+	
+	/*public void changeSens(){
+		if(monte){
+			monte = false;
+			sens = 1;
 		}
-		while(y + (int)(vitesse*Math.sin(direction))<0){
-			y=0;
-			this.direction+=Math.PI/2;
+		else{
+			monte = true;
+			sens = -1;
 		}
+	}*/
+    
+    public boolean bouger(JPanel jp){
+		/*if(x > vitesse*Math.cos(direction) && y > hauteurMax + vitesse*Math.sin(direction) && x < jp.getWidth() - vitesse*Math.cos(direction) - largeur  &&  y < jp.getHeight()- hauteur ){
+			x +=  sens*vitesse*Math.cos(direction);
+			y +=  sens*vitesse*Math.sin(direction);
+		}else{
+			while(x > 0 && x < jp.getWidth()-largeur && y > hauteurMax  &&  y < jp.getHeight()- hauteur ){ //tant qu'on ne touche pas un mur
+				x +=  sens*1*Math.cos(direction);
+				y +=  sens*1*Math.sin(direction);
+			}
+			changeDirection();
+			changeSens();
+			x +=  sens*vitesse*Math.cos(direction);
+			y +=  sens*vitesse*Math.sin(direction);
+		}*/
+		
 		super.bouger();
+		
+		if(x<0){
+			x = 0;
+			changeDirection();
+			
+		}
+		if(x> jp.getWidth()-largeur){
+			x = jp.getWidth()- largeur;
+			changeDirection();
+		}
+		if(y < hauteurMax){
+			y = hauteurMax;
+			changeDirection();
+			//changeSens();
+			vitesse = -vitesse;
+		}
+		if(y > jp.getHeight() - hauteur){
+			y = jp.getHeight() - hauteur;
+			changeDirection();
+			//changeSens();
+			vitesse = -vitesse;
+		}
+		return true;
 	}
 	
 }
