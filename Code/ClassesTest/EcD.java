@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-/**
- * Cette classe nous servira de test pour les composants graphiques
- */
+
 public class EcD implements ActionListener {
     private MaFenTest fen;
 
@@ -12,7 +10,17 @@ public class EcD implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae) {
-       fen.getPersonnage().deplacement(false);
+		
+		/**Perso*/
+	   /*fen.getPersonnage().setDirection(0);
+       fen.getPersonnage().bouger(fen.getPanDessin());*/
+       
+       /**Missile*/
+       
+       System.out.println(fen.getBalle().bouger(fen.getPanDessin()));
+       System.out.println(fen.getBalle().getX() + "     " +  fen.getBalle().getY()  + "     " +  fen.getBalle().getDirection()  + "     " +  fen.getBalle().getMonte()  + "     " +  fen.getBalle().getSens());
+       
+       
        fen.getPanDessin().repaint();
     }
 }
