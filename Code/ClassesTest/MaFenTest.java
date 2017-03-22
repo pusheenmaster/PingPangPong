@@ -18,6 +18,7 @@ public class MaFenTest extends JFrame{
 	private Joueur j1;
     private Missile m1;
     private Personnage p1;
+    private Balle b1;
 	
 	/*
 	public int getHeight(){
@@ -42,6 +43,10 @@ public class MaFenTest extends JFrame{
 		return m1;
 	}
 	
+	public Balle getBalle(){
+		return b1;
+	}
+	
 	public Personnage getPersonnage(){
 		return p1;
 	}
@@ -50,13 +55,21 @@ public class MaFenTest extends JFrame{
 		
 		super("Fenetre de dessin");
 		
+		panDessin = new PanDessin(this);
+		heightPanDessin = panDessin.getHeight();
+		widthPanDessin = panDessin.getWidth();
+		
+		System.out.println(heightPanDessin);
+		
 		// Initialisation des objets
-        p1 = new Personnage("paddy.jpg");
+        p1 = new Personnage("paddy.jpg", 1000, 650);
         j1 = new Joueur("Moi", p1);
-        m1 = new Missile(p1.getX());
+        m1 = new Missile(p1.getX(), 1000, 650 );
+        b1 = new Balle(1, panDessin);
         
-        System.out.println(p1.getX());
-        System.out.println(m1.getX());
+       // System.out.println(p1.getX());
+       // System.out.println(m1.getX());
+       // System.out.println(b1.getHauteurMax());
         
 	
 		
@@ -65,9 +78,7 @@ public class MaFenTest extends JFrame{
 		JButton btnD = new JButton("droite");
 		btnD.addActionListener(new EcD(this));
 		
-		panDessin = new PanDessin(this);
-		heightPanDessin = panDessin.getHeight();
-		widthPanDessin = panDessin.getWidth();
+		
 		
 		panDessin.setBackground(Color.BLUE);
 		
