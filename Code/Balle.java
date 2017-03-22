@@ -12,8 +12,8 @@ public class Balle extends Objet {
 	
     private int numero;
     private int hauteurMax;
-    private boolean monte;
-    private int sens;
+    private boolean monte; // pas utilisé, pour tests
+    private int sens; // pas utilisé, pour tests
     
     /** Balle qui part de gauche a droite **/
 	public Balle(int numero, JPanel jp){
@@ -37,11 +37,11 @@ public class Balle extends Objet {
 		return direction;
 	}
 	
-	public boolean getMonte(){
+	public boolean getMonte(){  // pour tests
 		return monte;
 	}
 	
-	public int getSens(){
+	public int getSens(){  // pour tests
 		return sens;
 	}
     
