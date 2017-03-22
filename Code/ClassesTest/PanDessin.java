@@ -15,8 +15,9 @@ public class PanDessin extends JPanel {
 	
 		super.paintComponent(g);
 
-		fen.getMissile().dessiner(g, fen);
+		fen.getMissile().dessiner(g, this);
 		fen.getPersonnage().dessiner(g, this);
+		fen.getBalle().dessiner(g, this);
 		
 
 	}
