@@ -42,10 +42,14 @@ public class Objet {
     public int getX(){
         return x;
     }
-    /*
+    
+    public void setDirection(double dir){
+		direction = dir;
+	}
+    
     public int getY(){
         return y;
-    }*/
+    }
     
     /** Methode pour bouger l'objet. Delta s'exprime en ms **/
     public boolean bouger() {
