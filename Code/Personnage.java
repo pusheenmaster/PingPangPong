@@ -9,9 +9,9 @@ public class Personnage extends Objet{
 	
     private int nbVies;
     
-    public Personnage(JPanel jp, String nomImage){
-        super(jp.getWidth()/2 , 0, nomImage, 0, 5);
-		y = jp.getHeight() - hauteur;
+    public Personnage(String nomImage, int largPan, int hautPan){
+        super(largPan/2 , 0, nomImage, Math.PI, 5);
+		y = hautPan - hauteur;
         nbVies = 3;
     }
    
