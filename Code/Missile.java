@@ -10,10 +10,10 @@ public class Missile extends Objet { // mettre fenetre jeu taille inchangeable
 	
     private int taille; //taille rectangle fleche
     
-    public Missile(int xPerso, JPanel jp ) {   
-        super(xPerso, 0, "pointe1.png", Math.PI/2, 10);
-        y = jp.getHeight() - hauteur;
-        taille = jp.getHeight() - hauteur - y;
+    public Missile(int xPerso, int largPan, int hautPan ) {   
+        super(xPerso, 0, "pointe1.png", -Math.PI/2, 10);
+        y = hautPan - hauteur;
+        taille = hautPan - hauteur - y;
         
     }
     
@@ -24,7 +24,7 @@ public class Missile extends Objet { // mettre fenetre jeu taille inchangeable
 	
     public void dessiner(Graphics g , JPanel jp){
         super.dessiner(g, jp);
-        g.fillRect((int)(x + largeur/4), jp.getHeight() - taille , largeur/2, taille);
+        g.fillRect((int)(x + largeur/2), jp.getHeight() - taille , 5, taille);
     }
 
     public boolean bouger(JPanel jp){
