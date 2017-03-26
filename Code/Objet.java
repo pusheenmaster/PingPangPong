@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.*;
 import javax.imageio.*;
 import java.io.File;
 
@@ -59,7 +60,7 @@ public class Objet {
 	}
     
     public boolean collision(Objet o){
-        Object ob = new Object();			//création d'un objet pour créer les boites
+        /*Object ob = new Object();			//création d'un objet pour créer les boites
 		//Boite1
 		Ellipse2D boite1 = (Ellipse2D)ob;	//transformation de l'objet en ellipse pour la boite1
 		boite1.setFrame((double)x,(double)y,(double)hauteur,(double)largeur);	//attribution des caractéristiques de l'ellipse
@@ -68,7 +69,10 @@ public class Objet {
 		boite2.setFrame((double)o.x,(double)o.y,(double)o.hauteur,(double)o.largeur);
         return boite1.intersects((double)o.x,(double)o.y,(double)o.hauteur,(double)o.largeur)&&boite2.intersects((double)x,(double)y,(double)hauteur,(double)largeur);
 		//return true si l'ellipse qui entoure le premier objet intersecte le rectangle qui entoure le second
-		//et qu'en même temps, l'ellipse qui entoure le second objet intersecte le rectangle qui entoure le premier
+		//et qu'en même temps, l'ellipse qui entoure le second objet intersecte le rectangle qui entoure le premier*/
+	Rectangle boite1=new Rectangle(x,y,hauteur,largeur);
+	Rectangle boite2=new Rectangle(o.x,o.y,o.hauteur,o.largeur);
+	return boite1.intersects(boite2); 
     }
     
     public void dessiner(Graphics g, JPanel jp){
