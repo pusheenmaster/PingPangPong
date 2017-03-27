@@ -19,7 +19,7 @@ public class Balle extends Objet {
     /** Balle qui part de gauche a droite **/
 	public Balle(int numero, JPanel jp){
         //super(600, 200 ,("balle_"+numero+".png"), 2*Math.PI/3, numero*2 ); // toutes les balles initialisée pareil
-        super(600, 100 ,"balle.png", 2*Math.PI/3, 30 );
+        super(600, 100 ,"balle.png", 2*Math.PI/3, 2*numero );
         this.numero = numero;
         hauteurMax = 100*numero; // a changer en fonction numero
         monte = false;
