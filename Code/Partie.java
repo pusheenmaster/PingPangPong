@@ -22,8 +22,9 @@ public class Partie {
     private boolean finPartie;
     
     // Constructeur
-    public Partie(){
-        
+    public Partie(Joueur joueur, Personnage perso){
+        this.joueur=joueur;
+        this.perso=perso;
     }
     
     // Accesseurs
@@ -54,8 +55,9 @@ public class Partie {
     public void setJoueur(Joueur joueur){
         this.joueur = joueur;
     }
-    
-    
+    public void setPerso(Personnage perso){
+        this.perso = perso;
+    }
     // Methodes
     public boolean finPartie(){
         return true;
