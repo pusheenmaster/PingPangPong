@@ -6,8 +6,6 @@ import java.awt.geom.*;
 import java.awt.image.*;
 
 public class FenetreAccueil extends JFrame implements ActionListener{
-
-    //Declaration des attributs de la fenêtre
     
     // * * * AFFICHAGE * * *
     // taille fenêtre
@@ -22,10 +20,14 @@ public class FenetreAccueil extends JFrame implements ActionListener{
     private JButton boutonScores = new JButton();
     private JButton boutonCredits = new JButton();
     private JButton boutonAccueil = new JButton();
+    private JButton boutonSelection = new JButton();
     
     // * * * DEROULEMENT DU JEU * * *
+    private Personnage persoChoisi = new Personnage("paddy.jpg",LARGEUR/2,HAUTEUR-50);
+    private Joueur joueurChoisi =new Joueur("Moi", persoChoisi);
     private boolean jeuEnCours = false;
     private boolean debut = true;
+    LesScores scores = new LesScores();
     
     /**
      * Constructeur de la classe UneFenetre
@@ -40,24 +42,24 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setAlwaysOnTop(true);
 
         // Création des éléments visibles sur la fenetre
         boutonJouer.setText("Lancer la Partie");
         boutonScores.setText("HighScores");
         boutonCredits.setText("Crédits");
         boutonAccueil.setText("Retour");
+        boutonSelection.setText("Changer de Joueur");
         
         //Création du conteneur principal
-        panelPrincipal.setBackground(Color.WHITE);
+        panelPrincipal.setBackground(Color.BLUE);
         panelPrincipal.setLayout(new BorderLayout());
         
         //Création des conteneurs secondaires
         panelAffichage = new PanAffichage(LARGEUR,HAUTEUR-50);
         
         panelCommandes.setPreferredSize(new Dimension(LARGEUR,50));
-        panelCommandes.setBackground(Color.BLUE);
-        GridLayout gl = new GridLayout(1, 4, 10, 10);
+        panelCommandes.setBackground(Color.WHITE);
+        GridLayout gl = new GridLayout(1, 5, 10, 10);
         panelCommandes.setLayout(gl);
         
 
@@ -66,6 +68,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         panelCommandes.add(boutonJouer);
         panelCommandes.add(boutonCredits);
         panelCommandes.add(boutonAccueil);
+        panelCommandes.add(boutonSelection);
         panelPrincipal.add(panelAffichage, BorderLayout.CENTER);
         panelPrincipal.add(panelCommandes, BorderLayout.SOUTH);
                 
@@ -74,6 +77,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         boutonScores.addActionListener(this);
         boutonCredits.addActionListener(this);
         boutonAccueil.addActionListener(this);
+        boutonSelection.addActionListener(this);
         
         //Mise en place du conteneur principal dans la fenetre
         this.setContentPane(panelPrincipal);
@@ -82,25 +86,29 @@ public class FenetreAccueil extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == boutonJouer) {
-            Partie nouvellePartie = new Partie();
-            setTitle("PANG ! Temps : "+nouvellePartie.get(temps)/1000+" Vies : "+0);
+            Partie nouvellePartie = new Partie(joueurChoisi,persoChoisi);
+            panelAffichage = new PanJeu(LARGEUR,HAUTEUR-50,nouvellePartie);
+            setTitle("PANG ! Temps : "+((PanJeu) panelAffichage).getTemps()/1000+" Vies : "+0);
             jeuEnCours = true;
             debut = false;
-            panelAffichage = new PanScores(LARGEUR,HAUTEUR-50);
+        }
+        
+        if (e.getSource() == boutonSelection) {
+           //FenetreSelection = new FenetreSelection();
         }
         
         if (e.getSource() == boutonScores) {
             setTitle("PANG ! Tableau des Scores");
+            panelAffichage = new PanScores(LARGEUR,HAUTEUR-50,scores);
             jeuEnCours = false;
             debut = false;
-            panelAffichage = new PanScores(LARGEUR,HAUTEUR-50);
         }
         
         if (e.getSource() == boutonCredits) {
             setTitle("PANG ! Crédits");
             jeuEnCours = false;
             debut = false;
-            panelAffichage = new PanCredits(LARGEUR,HAUTEUR-50,"cred.png");
+            panelAffichage = new PanCredits(LARGEUR,HAUTEUR-50,"cred.jpg");
         }  
         if (e.getSource() == boutonAccueil || debut) {
             setTitle("PANG !");
