@@ -25,7 +25,7 @@ public class LesScores {
 			lesScores[0][1] += s;
 		}
 		// nouveau score en derniere position
-		else if(lesScores[4][0] !=null && Integer.parseInt(lesScores[4][1]) < s){
+		else if(lesScores[4][0] !=null && Integer.parseInt(lesScores[3][1]) < s){
 			lesScores[4][0] = nom;
 			lesScores[4][1] = "" + s;
 		}
@@ -33,7 +33,8 @@ public class LesScores {
 			for(int i=lesScores.length-2 ; i >= 0 ; i--){
 				if(lesScores[i][0]!=null){ 
 					if(Integer.parseInt(lesScores[i][1]) < s){
-						lesScores[i+1] = lesScores[i];
+						lesScores[i+1][0] = lesScores[i][0];
+						lesScores[i+1][1] = lesScores[i][1];
 						lesScores[i][0] = nom;
 						lesScores[i][1] = "" + s;
 					}
