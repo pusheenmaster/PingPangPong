@@ -28,8 +28,7 @@ public class LesScores {
 		else if(lesScores[4][0] !=null && Integer.parseInt(lesScores[3][1]) < s){
 			lesScores[4][0] = nom;
 			lesScores[4][1] = "" + s;
-		}
-		else{
+		}else{
 			for(int i=lesScores.length-2 ; i >= 0 ; i--){
 				if(lesScores[i][0]!=null){ 
 					if(Integer.parseInt(lesScores[i][1]) < s){
@@ -43,6 +42,10 @@ public class LesScores {
 					lesScores[i][1] = "" + s;
 				}
 			}
+		}
+		if(lesScores[4][0]==null && lesScores[3][0]!=null && Integer.parseInt(lesScores[3][1]) > s){
+			lesScores[4][0] = nom;
+			lesScores[4][1] = "" + s;
 		}
 	}
 }
