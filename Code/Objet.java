@@ -17,13 +17,14 @@ public class Objet {
     protected int y;
     protected int hauteur;  // verif
     protected int largeur;  // vérifier utilisée
-    protected int vitesse;
+    protected int vitesseX;
+    protected int vitesseY;
      /** La direction (angle par rapport à l'axe horizontal*/
     protected double direction;
     protected BufferedImage image;
     
     
-    public Objet(int x, int y, String nomImage, double direction, int vitesse){
+    public Objet(int x, int y, String nomImage, double direction, int vitesseX, int vitesseY){
         this.x = x;
         this.y = y;
         try {
@@ -33,10 +34,13 @@ public class Objet {
             System.exit(0);
         } 
         this.direction = direction;
-        this.vitesse = vitesse;
+        this.vitesseX = vitesseX;
+        this.vitesseY = vitesseY;
         this.largeur = image.getWidth();
         this.hauteur = image.getHeight();
     }
+    
+  
     
     
     
@@ -52,27 +56,27 @@ public class Objet {
         return y;
     }
     
+
+    
+    public int getHauteur(){
+		return hauteur;
+	}
+	
+	public int getLargeur(){
+		return largeur;
+	}
+    
     /** Methode pour bouger l'objet. Delta s'exprime en ms **/
     public boolean bouger() {
-		x +=  vitesse*Math.cos(direction);
-		y +=  vitesse*Math.sin(direction);
+		x +=  vitesseX*Math.cos(direction);
+		y +=  vitesseY*Math.sin(direction);
 		return true;
 	}
     
     public boolean collision(Objet o){
-        /*Object ob = new Object();			//création d'un objet pour créer les boites
-		//Boite1
-		Ellipse2D boite1 = (Ellipse2D)ob;	//transformation de l'objet en ellipse pour la boite1
-		boite1.setFrame((double)x,(double)y,(double)hauteur,(double)largeur);	//attribution des caractéristiques de l'ellipse
-		//Boite2
-		Ellipse2D boite2 = (Ellipse2D)ob;	//idem pour la boite2
-		boite2.setFrame((double)o.x,(double)o.y,(double)o.hauteur,(double)o.largeur);
-        return boite1.intersects((double)o.x,(double)o.y,(double)o.hauteur,(double)o.largeur)&&boite2.intersects((double)x,(double)y,(double)hauteur,(double)largeur);
-		//return true si l'ellipse qui entoure le premier objet intersecte le rectangle qui entoure le second
-		//et qu'en même temps, l'ellipse qui entoure le second objet intersecte le rectangle qui entoure le premier*/
-	Rectangle boite1=new Rectangle(x,y,hauteur,largeur);
-	Rectangle boite2=new Rectangle(o.x,o.y,o.hauteur,o.largeur);
-	return boite1.intersects(boite2); 
+		Rectangle boite1=new Rectangle(x,y,largeur,hauteur);
+		Rectangle boite2=new Rectangle(o.x,o.y,o.largeur,o.hauteur);
+		return boite1.intersects(boite2); 
     }
     
     public void dessiner(Graphics g, JFrame fen){
