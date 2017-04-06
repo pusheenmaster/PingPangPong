@@ -11,7 +11,7 @@ public class Personnage extends Objet{
     private int nbVies;
     
     public Personnage(String nomImage, int largPan, int hautPan){
-        super(largPan/2 , 0, nomImage, Math.PI, 25);
+        super(largPan/2 , 0, nomImage, Math.PI, 50, 0);
         if(nomImage == "perso4.png"){
 			num=4;
 		} else if(nomImage == "perso2.png"){
@@ -33,8 +33,8 @@ public class Personnage extends Objet{
         return nbVies;
     }
     
-    public void setNbVies(int nb){
-        nbVies = nb;
+    public void perdreUneVie(){
+        nbVies--;
     }
     
     public boolean bouger(JFrame fen){  // always returns true
