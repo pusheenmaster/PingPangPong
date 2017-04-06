@@ -9,7 +9,7 @@ import java.awt.image.*;
 public class PanCredits extends JPanel{
     
     public PanCredits(){
-		JLabel J = new JLabel (new ImageIcon("Credits.png"));
+		JLabel J = new JLabel (new ImageIcon("credits.png"));
 		
 		this.add(J);
 	}
