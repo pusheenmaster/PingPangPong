@@ -11,8 +11,12 @@ import java.util.LinkedList ;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         
-    // Attibuts
-    private Partie partie;
+    // Attibuts    
+    
+    private Personnage perso;
+    private Joueur joueur;
+    private LinkedList<Balle> listeBalles;
+    private Missile missile;
     
     // Touches clavier
     private boolean toucheGauche;
@@ -29,18 +33,26 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
     private Image imageFond;
     private BufferedImage buff;
     
+    public boolean jeuFini(){
+		return listeBalles.size()==0  ||  perso.getNbVies()<=0;
+	}
+    
     public FenetreJeu(Joueur joueur){
 		this.setLocationRelativeTo(null);
 		this.setTitle("PANG !!!!");
-		this.setSize(900, 700);
+		this.setSize(1100, 700);
 		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-        partie = new Partie(joueur,this);
-        numero = joueur.getPerso().getNum();
+		
+        this.joueur=joueur;
+        this.perso=joueur.getPerso();
+        listeBalles = new LinkedList();
+        listeBalles.add(new Balle(1,this, 0,0));
+        missile = null;
+        numero = perso.getNum();
         System.out.println(numero);
       
         // Initialisation du buffer
-        buff = new BufferedImage(900,700,BufferedImage.TYPE_INT_RGB);
+        buff = new BufferedImage(getWidth(),getHeight(),BufferedImage.TYPE_INT_RGB);
         
         // Chargement de l'image d'arrière plan
         Toolkit t = Toolkit.getDefaultToolkit();
@@ -65,21 +77,55 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e){
         // actualisation du jeu à chaque pas de temps
         temps += TPS_TIMER_MS;
-        this.setTitle("Temps : "+temps/1000);
+        this.setTitle("Temps : "+temps/1000 + "      Vies : " + perso.getNbVies() );
+        
+        
+        //missile en haut fenetre
+        if(missile != null && missile.getEnHaut()){
+			missile = null;
+		}
+		//collision balle/perso
+		for (int i=0 ; i<listeBalles.size() ; i++) {
+            if (perso.collision(listeBalles.get(i))) {
+                perso.perdreUneVie();
+                listeBalles.remove(i);
+                
+            }
+            // collision balle/missile
+			if(missile != null &&  listeBalles.get(i).collision(missile)){
+				if(listeBalles.get(i).getNumero() < 5){
+					Balle b1 = (new Balle(listeBalles.get(i).getNumero()+1,this, listeBalles.get(i).getX() ,listeBalles.get(i).getY()));
+					Balle b2 = (new Balle(listeBalles.get(i).getNumero()+1,this, listeBalles.get(i).getX() ,listeBalles.get(i).getY()));
+					b2.changeDirection();
+					listeBalles.add(b1);
+					listeBalles.add(b2);
+				
+				}
+				listeBalles.remove(i);
+				missile =null;
+			}
+				
+        }
+		
         if(toucheDroit){
-            partie.getPersonnage().setDirection(0);
-            partie.getPersonnage().bouger(this);
+            perso.setDirection(0);
+            perso.bouger(this);
         }
         if(toucheGauche){
-            partie.getPersonnage().setDirection(Math.PI);
-            partie.getPersonnage().bouger(this);
+            perso.setDirection(Math.PI);
+            perso.bouger(this);
         }
         if(toucheSpace){
-            Missile nouvMissile = new Missile(partie.getPersonnage().getX(),900,700);
-            partie.getListeMissiles().add(nouvMissile);
+            missile = new Missile(perso.getX(),getWidth(),getHeight());
         }
+        
+        if(jeuFini()){
+			this.setVisible(false);
+		}
         repaint();
     }
+    
+    
         
     public void keyTyped(KeyEvent e) {}
 
@@ -112,14 +158,16 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
             // préparation de l'affichage en dessinant dans le buffer
             Graphics buffer = buff.getGraphics(); // récupération de l'objet Graphics associé au buffer
             buffer.drawImage(imageFond,0,0,this); // dessin dans cet objet Graphics
-            for(int i = 0 ; i< partie.getListeMissiles().size() ; i++){
-				    partie.getListeMissiles().get(i).bouger(this);
-                    partie.getListeMissiles().get(i).dessiner(buffer, this);
-            }
-            partie.getPersonnage().dessiner(buffer, this);
-            for(int i = 0 ; i< partie.getListeBalles().size() ; i++){
-                    partie.getListeBalles().get(i).bouger(this);
-                    partie.getListeBalles().get(i).dessiner(buffer, this);
+        
+            if(missile != null){
+				missile.bouger(this);
+				missile.dessiner(buffer, this);
+			}
+				
+            perso.dessiner(buffer, this);
+            for(int i = 0 ; i< listeBalles.size() ; i++){
+                    listeBalles.get(i).bouger(this);
+                    listeBalles.get(i).dessiner(buffer, this);
 
             }
             g.drawImage(buff,0,0,this);
