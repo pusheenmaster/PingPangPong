@@ -22,11 +22,15 @@ public class PanScores extends JPanel{
 		
 		JLabel image = new JLabel (new ImageIcon("Score.png"));
 		
+		
 		JPanel panTableau = new JPanel();
+		
 		this.add(image, BorderLayout.NORTH);
+		
 		panTableau.add(tableau); 
 		panTableau.setBackground(Color.DARK_GRAY);
 		this.add(panTableau, BorderLayout.CENTER);
+
 		
 
 		 
