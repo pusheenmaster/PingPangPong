@@ -18,10 +18,10 @@ public class Balle extends Objet {
     
     /** Balle qui part de gauche a droite **/
 	public Balle(int numero, JFrame fen, int x0, int y0){
-        super(x0,y0,("balle_"+numero+".png"), 2*Math.PI/3, numero*5); // toutes les balles initialisée pareil
+        super(x0,y0,("balle_"+numero+".png"), Math.PI/5, 15, 30); // toutes les balles initialisée pareil
         //super(600, 100 ,"balle.png", 2*Math.PI/3, 30 );
         this.numero = numero;
-        hauteurMax = numero*100; // a changer en fonction numero
+        hauteurMax = (int)(Math.sqrt(numero)*200); // a changer en fonction numero
         monte = false;
         sens = 1;
         rebond1 = false;
@@ -48,17 +48,32 @@ public class Balle extends Objet {
 	}
     
     public void changeDirection(){
-		if(direction == Math.PI/3){
-			direction = 2*direction;
+		if(direction == Math.PI/5){
+			direction = 4*direction;
 		}
 		else{
-			direction = Math.PI/3;
+			direction = Math.PI/5;
+		}
+	}
+	
+	/*public void inverserVitesses(){
+		vitesseY = -vitesseY;
+		vitesseX = -vitesseX;
+	}*/
+	
+	public void setVitesse(){
+		if(y >= hauteurMax){
+			vitesseY = vitesseX * ((y-hauteurMax)/80 +1);
+		}
+		else{
+			vitesseY = vitesseX;
 		}
 	}
 	
     public boolean bouger(JFrame fen ){
 		
 		super.bouger();
+		setVitesse();
 		
 		if(!rebond1){
 			super.bouger();
@@ -79,12 +94,14 @@ public class Balle extends Objet {
 		if(rebond1 &&  y < hauteurMax){
 			y = hauteurMax;
 			changeDirection();
-			vitesse = -vitesse;
+			vitesseX = -vitesseX;
+			vitesseY = -vitesseY;
 		}
 		if(rebond1 && y > fen.getHeight() - hauteur){
 			y = fen.getHeight() - hauteur;
 			changeDirection();
-			vitesse = -vitesse;
+			vitesseY = -vitesseY;
+			vitesseX = -vitesseX;
 		}
 		return true;
 	}
