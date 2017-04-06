@@ -7,19 +7,25 @@ import java.io.*;
 import javax.imageio.*;
 import javax.swing.*;
 
-public class Missile extends Objet { // mettre fenetre jeu taille inchangeable
+public class Missile extends Objet {
 	
     private int taille; //taille rectangle fleche
+    private boolean enHaut;
     
     public Missile(int xPerso, int largPan, int hautPan ) {   
-        super(xPerso, 0, "missile.png", -Math.PI/2, 25);
+        super(xPerso, 0, "missile.png", -Math.PI/2, 0, 80);
         y = hautPan - hauteur;
         taille = hautPan - hauteur - y;
+        enHaut = false;
         
     }
   
     public int getTaille(){
 		return taille;
+	}
+	
+	public boolean getEnHaut(){
+		return enHaut;
 	}
 	
     public void dessiner(Graphics g , JFrame fen){
@@ -29,10 +35,11 @@ public class Missile extends Objet { // mettre fenetre jeu taille inchangeable
     }
 
     public boolean bouger(JFrame fen){
-		if(y<=0){
+		if(y<=20){
+			enHaut = true;
 			return false;
 		}else{
-            taille += vitesse;
+            taille += vitesseY;
             hauteur += taille;
             return super.bouger();
         }
