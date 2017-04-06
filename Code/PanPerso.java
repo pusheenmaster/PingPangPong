@@ -43,16 +43,21 @@ public class PanPerso extends JPanel {
 		b4.addActionListener(new EcouteurButtonPerso(this));
 		panButtons.add(b4);
 		
-		JButton boutonOK = new JButton("OK");
-		boutonOK.addActionListener(new EcouteurBoutonOKPerso(this));
+		JButton boutonOK = new JButton("Lancer la partie !");
+		boutonOK.addActionListener(new EcouteurBoutonLancerPartie(this));
 		JPanel panOK = new JPanel(new FlowLayout());
 		panOK.add(boutonOK);
+		
+		JLabel instructions = new JLabel (new ImageIcon("instructions.png"));
+		JPanel panBas = new JPanel(new BorderLayout());
+		panBas.add(instructions, BorderLayout.CENTER);
+		panBas.add(panOK, BorderLayout.SOUTH);
 		
 
 		this.setLayout(new BorderLayout());
 		this.add(panNom, BorderLayout.NORTH);
 		this.add(panButtons, BorderLayout.CENTER);
-		this.add(panOK, BorderLayout.SOUTH);
+		this.add(panBas, BorderLayout.SOUTH);
 		
 	}
 	
