@@ -34,10 +34,7 @@ public class Fenetre extends JFrame {
   
   public static void main(String[] args){
 	  LesScores scores = new LesScores();
-		scores.ajouterScore("Paddy", 1000);
-		scores.ajouterScore("croe", 2000);
-		scores.ajouterScore("Bouh", 100);
-    Fenetre fen = new Fenetre(scores);
+          Fenetre fen = new Fenetre(scores);
   }   
 }
 
