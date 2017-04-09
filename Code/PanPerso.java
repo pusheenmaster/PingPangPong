@@ -15,47 +15,48 @@ public class PanPerso extends JPanel {
 		
 		JPanel panButtons = new JPanel(new FlowLayout());
 		JPanel panNom = new JPanel(new FlowLayout());
+		JPanel panHaut = new JPanel(new GridLayout(2,1));
+		JPanel panBas = new JPanel(new BorderLayout());
+		JPanel panLabel = new JPanel(new FlowLayout());
 
-		// Si l'imagine n'existe pas, le JLabel est crée sans image
 		JLabel label = new JLabel("nom :");
 		panNom.add(label);
 		panNom.add(textField);
-		JLabel choixPerso = new JLabel("choisissez votre personnage :  ");
-		panButtons.add(choixPerso);
 		
-		ImageIcon imgIcon1 = new ImageIcon("perso1.png");
-		JButton b1 = new JButton(imgIcon1);
+		JLabel choixPerso = new JLabel("choisissez votre personnage :  ");
+		panLabel.add(choixPerso);
+		
+		panHaut.add(panNom);
+		panHaut.add(panLabel);
+		
+		JButton b1 = new JButton(new ImageIcon("perso1.png"));
 		b1.addActionListener(new EcouteurButtonPerso(this));
 		panButtons.add(b1);
 		
-		ImageIcon imgIcon2 = new ImageIcon("perso2.png");
-		JButton b2 = new JButton(imgIcon2);
+		JButton b2 = new JButton(new ImageIcon("perso2.png"));
 		b2.addActionListener(new EcouteurButtonPerso(this));
 		panButtons.add(b2);
 		
-		ImageIcon imgIcon3 = new ImageIcon("perso3.png");
-		JButton b3 = new JButton(imgIcon3);
+		JButton b3 = new JButton(new ImageIcon("perso3.png"));
 		b3.addActionListener(new EcouteurButtonPerso(this));
 		panButtons.add(b3);
 		
-		ImageIcon imgIcon4 = new ImageIcon("perso4.png");
-		JButton b4 = new JButton(imgIcon4);
+		JButton b4 = new JButton(new ImageIcon("perso4.png"));
 		b4.addActionListener(new EcouteurButtonPerso(this));
 		panButtons.add(b4);
 		
-		JButton boutonOK = new JButton("Lancer la partie !");
-		boutonOK.addActionListener(new EcouteurBoutonLancerPartie(this));
-		JPanel panOK = new JPanel(new FlowLayout());
-		panOK.add(boutonOK);
+		JButton boutonPartie = new JButton("Lancer la partie !");
+		boutonPartie.addActionListener(new EcouteurBoutonLancerPartie(this));
+		JPanel panLancerPartie = new JPanel(new FlowLayout());
+		panLancerPartie.add(boutonPartie);
 		
 		JLabel instructions = new JLabel (new ImageIcon("instructions.png"));
-		JPanel panBas = new JPanel(new BorderLayout());
 		panBas.add(instructions, BorderLayout.CENTER);
-		panBas.add(panOK, BorderLayout.SOUTH);
+		panBas.add(panLancerPartie, BorderLayout.SOUTH);
 		
 
 		this.setLayout(new BorderLayout());
-		this.add(panNom, BorderLayout.NORTH);
+		this.add(panHaut, BorderLayout.NORTH);
 		this.add(panButtons, BorderLayout.CENTER);
 		this.add(panBas, BorderLayout.SOUTH);
 		
