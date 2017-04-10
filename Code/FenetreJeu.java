@@ -38,10 +38,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 	}
     
     public FenetreJeu(Joueur joueur){
-		this.setLocationRelativeTo(null);
-		this.setTitle("PANG !!!!");
-		this.setSize(1100, 700);
-		this.setResizable(false);
+	this.setTitle("PANG !!!!");
+	this.setSize(1100, 700);
+	this.setResizable(false);
+	this.setLocationRelativeTo(null);
 		
         this.joueur=joueur;
         this.perso=joueur.getPerso();
