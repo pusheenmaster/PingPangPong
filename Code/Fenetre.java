@@ -4,10 +4,11 @@ import javax.swing.JTabbedPane;
 
 public class Fenetre extends JFrame {
   private JTabbedPane onglet;
-   
+  
+  /**Constructeur de Fenetre
+  *@param scores (LesScores)
+  **/
   public Fenetre(LesScores scores){
-	  
-    this.setLocationRelativeTo(null);
     this.setTitle("PING PANG PONG !!!!");
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(800, 530);
@@ -27,11 +28,8 @@ public class Fenetre extends JFrame {
     this.setVisible(true);
   }
   
-  
-  public boolean finPartie(){
-	  return true;
-  }
-  
+  /**méthode main, à executer
+  **/	
   public static void main(String[] args){
 	  LesScores scores = new LesScores();
           Fenetre fen = new Fenetre(scores);
