@@ -6,12 +6,14 @@ public class PanPerso extends JPanel {
 	
 	private Joueur joueur;
 	private JTextField textField= new JTextField("Croe",15);
+	private Fenetre fen;
 
 
 	
-	public PanPerso (){
+	public PanPerso(Fenetre fen){
 		
 		joueur = new Joueur("Croe",new Personnage("perso1.png",900,700)); // joueur par défaut
+		this.fen = fen;
 		
 		JPanel panButtons = new JPanel(new FlowLayout());
 		JPanel panNom = new JPanel(new FlowLayout());
@@ -68,6 +70,10 @@ public class PanPerso extends JPanel {
 	
 	public Joueur getJoueur(){
 		return joueur;
+	}
+
+	public Fenetre getFen(){
+		return fen;
 	}
 
 }
