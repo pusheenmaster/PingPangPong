@@ -11,7 +11,7 @@ import java.lang.Object;
 public class Balle extends Objet {
 	
     private int numero;
-    private int hauteurMax;
+    private int hauteurMax; // plus les balles sont petites, moins elles montent haut
     private boolean monte;
     private int sens;
     private boolean rebond1;
@@ -19,7 +19,6 @@ public class Balle extends Objet {
     /** Balle qui part de gauche a droite **/
 	public Balle(int numero, JFrame fen, int x0, int y0){
         super(x0,y0,("balle_"+numero+".png"), Math.PI/5, 15, 30); // toutes les balles initialisée pareil
-        //super(600, 100 ,"balle.png", 2*Math.PI/3, 30 );
         this.numero = numero;
         hauteurMax = (int)(Math.sqrt(numero)*200); // a changer en fonction numero
         monte = false;
@@ -35,15 +34,15 @@ public class Balle extends Objet {
 		return hauteurMax;
 	}
 	
-	public double getDirection(){
+    public double getDirection(){
 		return direction;
 	}
 	
-	public boolean getMonte(){
+    public boolean getMonte(){
 		return monte;
 	}
 	
-	public int getSens(){
+    public int getSens(){
 		return sens;
 	}
     
@@ -56,12 +55,7 @@ public class Balle extends Objet {
 		}
 	}
 	
-	/*public void inverserVitesses(){
-		vitesseY = -vitesseY;
-		vitesseX = -vitesseX;
-	}*/
-	
-	public void setVitesse(){
+    public void setVitesse(){
 		if(y >= hauteurMax){
 			vitesseY = vitesseX * ((y-hauteurMax)/80 +1);
 		}
@@ -78,26 +72,26 @@ public class Balle extends Objet {
 		if(!rebond1){
 			super.bouger();
 		}
-		if(!rebond1 && (x<0 ||  x > fen.getWidth()-largeur   ||  y > fen.getHeight() - hauteur)  ){
+		if(!rebond1 && (x<0 ||  x > fen.getWidth()-largeur   ||  y > fen.getHeight() - hauteur)  ){ //quand la balle atteind le bord ou sa hauteur maximale
 			rebond1 = true;
 		}
 		
-		if(rebond1 && x<0){
+		if(rebond1 && x<0){ //quand la balle atteind le bord gauche
 			x = 0;
 			changeDirection();
 			
 		}
-		if(rebond1 &&  x > fen.getWidth()-largeur){
+		if(rebond1 &&  x > fen.getWidth()-largeur){ //quand la balle atteind le bord droit
 			x = fen.getWidth()- largeur;
 			changeDirection();
 		}
-		if(rebond1 &&  y < hauteurMax){
+		if(rebond1 &&  y < hauteurMax){ //quand la balle touche le sol
 			y = hauteurMax;
 			changeDirection();
 			vitesseX = -vitesseX;
 			vitesseY = -vitesseY;
 		}
-		if(rebond1 && y > fen.getHeight() - hauteur){
+		if(rebond1 && y > fen.getHeight() - hauteur){ //quand la balle atteind sa hauteur maximale
 			y = fen.getHeight() - hauteur;
 			changeDirection();
 			vitesseY = -vitesseY;
