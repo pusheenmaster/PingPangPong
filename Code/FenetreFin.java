@@ -64,7 +64,14 @@ public class FenetreFin extends JFrame {
         
         panelSecondaire.add(texte);
 		panelSecondaire.add(chiffres);
+		
+		JButton boutonOK = new JButton("OK");
+		boutonOK.addActionListener(new EcouteurBoutonOK(this));
+		JPanel panelOK = new JPanel(new FlowLayout());
+		panelOK.add(boutonOK);
+		
         panelPrincipal.add(panelSecondaire, BorderLayout.CENTER);
+        panelPrincipal.add(panelOK, BorderLayout.SOUTH);
 		
 		this.setContentPane(panelPrincipal);
 		this.setVisible(true);
@@ -77,4 +84,12 @@ public class FenetreFin extends JFrame {
         +fenJ.getNbViolet()*30+fenJ.getNbCyan()*40+fenJ.getNbVert()*50
         +fenJ.getNbVies()*50*fenJ.getDerniereCollision()+3*(180-fenJ.getTemps())*fenJ.getDerniereCollision();
     }
+    
+    public int getScoreFinal(){
+		return scoreFinal;
+	}
+	
+	public FenetreJeu getFenJeu(){
+		return fenJ;
+	}
 }
