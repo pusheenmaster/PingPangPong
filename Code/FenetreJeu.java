@@ -11,8 +11,7 @@ import java.util.LinkedList ;
 
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         
-    // Attibuts    
-    
+    // Attibuts Principaux   
     private Personnage perso;
     private Joueur joueur;
     private LinkedList<Balle> listeBalles;
@@ -32,16 +31,28 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
     // Affichage 
     private Image imageFond;
     private BufferedImage buff;
+    public boolean affFin = false;
     
-    public boolean jeuFini(){
-		return listeBalles.size()==0  ||  perso.getNbVies()<=0;
-	}
+    // Attibuts pour comptage des scores   
+    private int derniereCollision; // 1 si balle touchée, 0 sinon
+    private int nbRose;
+    private int nbBleu;
+    private int nbViolet;
+    private int nbCyan;
+    private int nbVert;
     
     public FenetreJeu(Joueur joueur){
-	this.setTitle("PANG !!!!");
-	this.setSize(1100, 700);
-	this.setResizable(false);
-	this.setLocationRelativeTo(null);
+        
+        nbRose = 0;
+        nbBleu = 0;
+        nbViolet = 0;
+        nbCyan = 0;
+        nbVert = 0;
+		
+		this.setTitle("PANG !!!!");
+		this.setSize(1100, 700);
+		this.setResizable(false);
+        this.setLocationRelativeTo(null);
 		
         this.joueur=joueur;
         this.perso=joueur.getPerso();
@@ -89,7 +100,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
             if (perso.collision(listeBalles.get(i))) {
                 perso.perdreUneVie();
                 listeBalles.remove(i);
-                
+                derniereCollision = 0;
             }
             // collision balle/missile
 			if(missile != null &&  listeBalles.get(i).collision(missile)){
@@ -99,8 +110,9 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 					b2.changeDirection();
 					listeBalles.add(b1);
 					listeBalles.add(b2);
-				
 				}
+                derniereCollision = 1;
+                majCompteurs(listeBalles.get(i).getNumero());
 				listeBalles.remove(i);
 				missile =null;
 			}
@@ -119,9 +131,10 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
             missile = new Missile(perso.getX(),getWidth(),getHeight());
         }
         
-        if(jeuFini()){
-			this.setVisible(false);
-			perso.reinitialiserVies();
+        if(jeuFini() && !affFin){
+            FenetreFin fenF = new FenetreFin(this);
+			this.dispose();
+            affFin=true;
 		}
         repaint();
     }
@@ -172,5 +185,55 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 
             }
             g.drawImage(buff,0,0,this);
+        }
+        
+        public boolean jeuFini(){
+            return listeBalles.size()==0  ||  perso.getNbVies()<=0;
+        }
+    
+        
+        // Getters
+        public int getDerniereCollision(){
+            return derniereCollision;
+        }
+        public int getNbVies(){
+            return perso.getNbVies();
+        }
+        public int getNbRose(){
+            return nbRose;
+        }
+        public int getNbBleu(){
+            return nbBleu;
+        }
+        public int getNbViolet(){
+            return nbViolet;
+        }
+        public int getNbVert(){
+            return nbVert;
+        }
+        public int getNbCyan(){
+            return nbCyan;
+        }
+        public int getTemps(){
+            return temps/1000;
+        }
+        
+        // Mis à jour des compteurs de balles touchées
+        public void majCompteurs(int i){
+            if(i==1){
+                nbRose++;
+            }
+            if(i==2){
+                nbBleu++;
+            }
+            if(i==3){
+                nbViolet++;
+            }
+            if(i==4){
+                nbCyan++;
+            }
+            if(i==5){
+                nbVert++;
+            }
         }
 }
