@@ -36,6 +36,10 @@ public class Personnage extends Objet{
     public void perdreUneVie(){
         nbVies--;
     }
+	
+    public void reinitialiserVies(){
+	nbVies = 5;
+    }
     
     public boolean bouger(JFrame fen){  // always returns true
 		super.bouger();
