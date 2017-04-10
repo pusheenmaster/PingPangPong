@@ -13,6 +13,6 @@ public class EcouteurButtonPerso implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
 		JButton b = (JButton) (ae.getSource());
-		pan.getJoueur().setPerso(new Personnage(b.getIcon().toString(),900,700));
+		pan.getJoueur().setPerso(new Personnage(b.getIcon().toString(),900,700)); //choisir un personnage
     }
 }
