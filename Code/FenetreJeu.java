@@ -135,6 +135,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
             FenetreFin fenF = new FenetreFin(this);
 			this.dispose();
             affFin=true;
+            perso.reinitialiserVies();
 		}
         repaint();
     }
@@ -217,6 +218,9 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         public int getTemps(){
             return temps/1000;
         }
+        public Joueur getJoueur(){
+			return joueur;
+		}
         
         // Mis à jour des compteurs de balles touchées
         public void majCompteurs(int i){
