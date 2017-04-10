@@ -75,6 +75,7 @@ public class FenetreFin extends JFrame {
 		
 		this.setContentPane(panelPrincipal);
 		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 	
    public void calculScore(){
