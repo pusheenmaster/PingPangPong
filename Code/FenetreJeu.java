@@ -121,6 +121,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         
         if(jeuFini()){
 			this.setVisible(false);
+			perso.reinitialiserVies();
 		}
         repaint();
     }
