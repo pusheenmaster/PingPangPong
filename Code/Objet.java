@@ -11,6 +11,7 @@ import java.awt.geom.*;
 import javax.imageio.*;
 import java.io.File;
 
+
 public class Objet {
 	
 	protected int x; 
@@ -24,6 +25,9 @@ public class Objet {
     protected BufferedImage image;
     
     
+    /**Constructeur de Ojet instancie la direction, la vitesse horizontale et verticale, l'apparence et la taille de l'objet
+    *@param x (int), y (int), nom Image (String), direction (double), vitesseX (int), vitesseY (int)
+    **/
     public Objet(int x, int y, String nomImage, double direction, int vitesseX, int vitesseY){
         this.x = x;
         this.y = y;
@@ -40,10 +44,9 @@ public class Objet {
         this.hauteur = image.getHeight();
     }
     
-  
-    
-    
-    
+    /**la méthode getX retourne la position horizontale de l'objet
+    *@retrun x (int)
+    **/
     public int getX(){
         return x;
     }
