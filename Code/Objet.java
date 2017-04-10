@@ -51,37 +51,57 @@ public class Objet {
         return x;
     }
     
+    /**la méthode setDirection(dir) définit une nouvelle direction pour l'objet
+    *@param dir (double)
+    **/
     public void setDirection(double dir){
 		direction = dir;
 	}
     
+    /**la méthode getY retourne la position verticale de l'objet
+    *@retrun y (int)
+    **/
     public int getY(){
         return y;
     }
     
 
-    
+    /**la méthode getHauteur retourne la hauteur de l'objet
+    *@retrun hauteur (int)
+    **/
     public int getHauteur(){
 		return hauteur;
 	}
 	
-	public int getLargeur(){
-		return largeur;
-	}
+    /**la méthode getLargeur retourne la hauteur de l'objet
+    *@retrun largeur (int)
+    **/
+    public int getLargeur(){
+	return largeur;
+    }
     
-    /** Methode pour bouger l'objet. Delta s'exprime en ms **/
+    /** Methode pour bouger l'objet. Delta s'exprime en ms
+    *@return boolean
+    **/
     public boolean bouger() {
 		x +=  vitesseX*Math.cos(direction);
 		y +=  vitesseY*Math.sin(direction);
 		return true;
 	}
     
+	
+    /**la méthode collision(o) dit si l'objet est en collision avec o
+    *@param  o (Objet)
+    *@retrun boolean
+    **/
     public boolean collision(Objet o){
 		Rectangle boite1=new Rectangle(x,y,largeur,hauteur);
 		Rectangle boite2=new Rectangle(o.x,o.y,o.largeur,o.hauteur);
 		return boite1.intersects(boite2); 
     }
-    
+  
+    /**la méthode dessiner(g, fen) dessine g
+    **/
     public void dessiner(Graphics g, JFrame fen){
 		g.drawImage(image,x,y,fen);
     }
