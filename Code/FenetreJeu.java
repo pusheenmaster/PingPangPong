@@ -12,6 +12,7 @@ import java.util.LinkedList ;
 public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         
     // Attibuts Principaux   
+    private Fenetre fenPrincipale;
     private Personnage perso;
     private Joueur joueur;
     private LinkedList<Balle> listeBalles;
@@ -41,7 +42,9 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
     private int nbCyan;
     private int nbVert;
     
-    public FenetreJeu(Joueur joueur){
+    public FenetreJeu(Joueur joueur, Fenetre fenPrincipale){
+		
+		this.fenPrincipale = fenPrincipale;
         
         nbRose = 0;
         nbBleu = 0;
@@ -132,7 +135,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
         }
         
         if(jeuFini() && !affFin){
-            FenetreFin fenF = new FenetreFin(this);
+            FenetreFin fenF = new FenetreFin(this,fenPrincipale);
 			this.dispose();
             affFin=true;
             perso.reinitialiserVies();
@@ -147,7 +150,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         switch (code) {
-            case KeyEvent.VK_ESCAPE : this.dispose(); break;
+            case KeyEvent.VK_ESCAPE : this.fenPrincipale.setVisible(true); this.dispose(); break;
             case KeyEvent.VK_ENTER :
                 if (monTimer.isRunning())
                     monTimer.stop();
