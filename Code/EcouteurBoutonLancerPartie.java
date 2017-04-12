@@ -26,6 +26,3 @@ public class EcouteurBoutonLancerPartie implements ActionListener{
     }
     
 }
-
-
-
