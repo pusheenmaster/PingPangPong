@@ -20,6 +20,7 @@ public class EcouteurBoutonOK implements ActionListener{
        **/
 	public void actionPerformed(ActionEvent e){
 		fenFin.dispose();
+		fenFin.getFenP().majScores(fenFin.getFenJeu().getJoueur().getNom(),fenFin.getScoreFinal());
 		fenFin.getFenP().setVisible(true);
     }
     
