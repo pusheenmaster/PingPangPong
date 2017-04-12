@@ -59,7 +59,7 @@ public class FenetreJeu extends JFrame implements KeyListener, ActionListener {
 		
         this.joueur=joueur;
         this.perso=joueur.getPerso();
-        listeBalles = new LinkedList();
+        listeBalles = new LinkedList<Balle>();
         listeBalles.add(new Balle(1,this, 0,0));
         missile = null;
         numero = perso.getNum();
