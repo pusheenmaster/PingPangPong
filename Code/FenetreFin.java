@@ -5,11 +5,13 @@ import javax.swing.text.StyledDocument;
 public class FenetreFin extends JFrame {
 	
     private FenetreJeu fenJ;
+    private Fenetre fenP;
     private int scoreFinal;
     private int c;
 	 
-	public FenetreFin(FenetreJeu fenJ){
+	public FenetreFin(FenetreJeu fenJ, Fenetre fenP){
         
+        this.fenP = fenP;
         this.fenJ = fenJ;
         calculScore();
         Color couleur = new Color(193,193,255);
@@ -92,5 +94,9 @@ public class FenetreFin extends JFrame {
 	
 	public FenetreJeu getFenJeu(){
 		return fenJ;
+	}
+	
+	public Fenetre getFenP(){
+		return fenP;
 	}
 }
