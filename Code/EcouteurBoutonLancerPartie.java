@@ -20,8 +20,8 @@ public class EcouteurBoutonLancerPartie implements ActionListener{
        **/
 	public void actionPerformed(ActionEvent e){
 		pan.getJoueur().setNom(pan.getTextField().getText());
-		FenetreJeu fenJeu= new FenetreJeu(pan.getJoueur());
-		pan.getFen().dispose();
+		FenetreJeu fenJeu= new FenetreJeu(pan.getJoueur(), pan.getFen());
+		pan.getFen().setVisible(false);
 		System.out.println("nouveau jeu lancé");
     }
     
