@@ -31,28 +31,9 @@ public class Fenetre extends JFrame {
     this.setVisible(true);
   }
   
-  
-  /**Constructeur de Fenetre
-  *@param scores (LesScores)
-  **/
-  public Fenetre(String nom, int scorePrecedent){
-    this.setTitle("PING PANG PONG !!!!");
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(800, 530);
-    this.setLocationRelativeTo(null);
-    scores.ajouterScore(nom, scorePrecedent);
-    
-    //Création de notre conteneur d'onglets
-    onglet = new JTabbedPane();
-    onglet.add("Accueil",new PanAccueil());
-    onglet.add("Nouvelle Partie", new PanPerso(this));
-    onglet.add("Scores ", new PanScores(scores));
-    onglet.add("Crédits", new PanCredits());
-    
-    //On passe ensuite les onglets au content pane
-    this.getContentPane().add(onglet);
-    this.setVisible(true);
-  }
-  
+  public void majScores(String nom, int scorePrecedent){
+	  scores.ajouterScore(nom, scorePrecedent);
+  } 
 
 }
+
